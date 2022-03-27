@@ -1,28 +1,26 @@
 package main.internal;
 
 public class OperationFactory {
-    public Operation createTransformOperation(
-            OperationType operation,
-            Country country,
-            Resource resource,
-            int multiple
-    ) throws Exception {
-        if (operation != OperationType.TRANSFORM) {
-            throw new Exception("This operation has e to TRANSFORM");
-        }
-        return new Operation(operation, country, null, resource, multiple);
+    public static Operation createRootOperation(Country country) throws Exception {
+        return new Operation(country);
     }
 
-    public Operation createTransferOperation(
-            OperationType operation,
+    public static Operation createChildTransformOperation(
+            Country country,
+            Resource resource,
+            int multiple,
+            Operation parentOperation
+    ) throws Exception {
+        return new Operation(OperationType.TRANSFORM, country, null, resource, multiple, parentOperation);
+    }
+
+    public static Operation createChildTransferOperation(
             Country country,
             Country targetCountry,
             Resource resource,
-            int multiple
+            int multiple,
+            Operation parentOperation
     ) throws Exception {
-        if (operation != OperationType.TRANSFER) {
-            throw new Exception("This operation has e to TRANSFER");
-        }
-        return new Operation(operation, country, targetCountry, resource, multiple);
+        return new Operation(OperationType.TRANSFER, country, targetCountry, resource, multiple, parentOperation);
     }
 }

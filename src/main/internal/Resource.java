@@ -43,4 +43,9 @@ public class Resource {
     public boolean isRenewable() {
         return renewable;
     }
+
+    @Override
+    protected Resource clone() {
+        return new Resource(this.name, this.type, this.weight, this.transferable, this.renewable);
+    }
 }

@@ -14,8 +14,8 @@ public class TradeOperation {
         }
 
         Map<Resource, Integer> countryResourceMap = country.getResourceMap();
-        Map<Resource, Integer> inputManual = Constant.manufacturingInputManual.get(resource);
-        Map<Resource, Integer> outputManual = Constant.manufacturingOutputManual.get(resource);
+        Map<Resource, Integer> inputManual = Constant.MANUFACTURING_INPUT_MANUAL.get(resource);
+        Map<Resource, Integer> outputManual = Constant.MANUFACTURING_OUTPUT_MANUAL.get(resource);
 
         for (Map.Entry<Resource, Integer> entry : inputManual.entrySet()) {
             Resource requiredResource = entry.getKey();
@@ -39,7 +39,7 @@ public class TradeOperation {
                             (originalResource, originalAmount) -> originalAmount + producedAmount
                     );
         }
-    };
+    }
 
     public static void transfer(Country origin, Country destination, Resource resource, int amount) throws Exception {
         Map<Resource, Integer> originResourceMap = origin.getResourceMap();
@@ -51,5 +51,6 @@ public class TradeOperation {
 
         originResourceMap.compute(resource, (k, originalAmount) -> originalAmount - amount);
         destinationResourceMap.compute(resource, (k, originalAmount) -> originalAmount + amount);
-    };
+    }
+
 }

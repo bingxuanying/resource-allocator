@@ -14,7 +14,7 @@ public class CountryFactory {
 
     private Map<Resource, Integer> initResourceMap() {
         Map<Resource, Integer> resourceMap = new HashMap<>();
-        List<Resource> resourcesList = Constant.defaultResourceList;
+        List<Resource> resourcesList = Constant.DEFAULT_RESOURCE_LIST;
 
         resourcesList
                 .forEach(resource -> {
@@ -22,7 +22,7 @@ public class CountryFactory {
                         resourceMap.put(resource, 0);
                     } else {
                         // random the resource from 1 to 300
-                        resourceMap.put(resource, (int)(Math.random() * 300) + 1);
+                        resourceMap.put(resource, (int) (Math.random() * 300) + 1);
                     }
                 });
 

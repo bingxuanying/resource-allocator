@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Country {
     private final String name;
-    private Map<Resource, Integer> resourceMap = new HashMap<>();
+    private final Map<Resource, Integer> resourceMap;
 
     public Country(String name, Map<Resource, Integer> resourceMap) {
         this.name = name;
@@ -18,5 +18,12 @@ public class Country {
 
     public Map<Resource, Integer> getResourceMap() {
         return resourceMap;
+    }
+
+    @Override
+    protected Country clone() {
+        return new Country(this.name, new HashMap<>() {{
+            putAll(resourceMap);
+        }});
     }
 }
