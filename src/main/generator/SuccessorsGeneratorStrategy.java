@@ -1,18 +1,17 @@
-package main.search.generator;
+package main.generator;
 
-import main.internal.Country;
-import main.internal.Operation;
 import main.internal.Resource;
+import main.internal.State;
 
 import java.util.List;
 import java.util.Map;
 
 public interface SuccessorsGeneratorStrategy {
-    List<Operation> generate(
-            Operation parentOperation,
+    List<State> generate(
+            String targetCountryName,
+            State currentState,
             List<Resource> resourceList,
-            List<Country> countryList,
             Map<Resource, Map<Resource, Integer>> manufacturingInputManual,
             Map<Resource, Map<Resource, Integer>> manufacturingOutputManual
-    );
+    ) throws Exception;
 }

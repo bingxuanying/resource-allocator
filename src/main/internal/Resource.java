@@ -1,5 +1,7 @@
 package main.internal;
 
+import main.internal.type.ResourceType;
+
 public class Resource {
 
     private final String name;
@@ -46,6 +48,6 @@ public class Resource {
 
     @Override
     protected Resource clone() {
-        return new Resource(this.name, this.type, this.weight, this.transferable, this.renewable);
+        return this;
     }
 }

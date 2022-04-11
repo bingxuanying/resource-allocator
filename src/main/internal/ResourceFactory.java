@@ -1,5 +1,7 @@
 package main.internal;
 
+import main.internal.type.ResourceType;
+
 public class ResourceFactory {
     public Resource create(String name, ResourceType type, int weight) {
         return new Resource(name, type, weight, true, false);

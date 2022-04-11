@@ -21,7 +21,7 @@ public class Country {
     }
 
     @Override
-    protected Country clone() {
+    public Country clone() {
         return new Country(this.name, new HashMap<>() {{
             putAll(resourceMap);
         }});

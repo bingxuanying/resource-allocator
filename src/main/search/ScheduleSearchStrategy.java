@@ -1,9 +1,9 @@
 package main.search;
 
-import main.internal.Country;
+import main.internal.State;
 
 import java.util.List;
 
 public interface ScheduleSearchStrategy {
-    public List<String> search(Country country, int depth);
+    List<State> search(State root, int depth, String masterCountryName) throws Exception;
 }

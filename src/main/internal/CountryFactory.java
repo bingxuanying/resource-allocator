@@ -1,6 +1,7 @@
 package main.internal;
 
-import main.contant.Constant;
+import main.internal.contant.Constant;
+import main.internal.type.ResourceType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +22,8 @@ public class CountryFactory {
                     if (resource.getType() != ResourceType.BASIC) {
                         resourceMap.put(resource, 0);
                     } else {
-                        // random the resource from 1 to 300
-                        resourceMap.put(resource, (int) (Math.random() * 300) + 1);
+                        // random the resource from 30 to 80
+                        resourceMap.put(resource, (int) (Math.random() * 50) + 30);
                     }
                 });
 
