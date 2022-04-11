@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class State {
+public class State implements Comparable<State> {
     private final Map<String, Country> countryStates;
     private final Operation operation;
     private final int depth;
@@ -12,6 +12,7 @@ public class State {
     private final State parent;
     private final List<State> children;
     private double stateQuality = 0D;
+    private double finalDiscountedReward = 0D;
 
     public State(Map<String, Country> countryStates) {
         this.countryStates = countryStates;
@@ -38,6 +39,11 @@ public class State {
         this.root = parent.getDepth() == 0 ? parent : parent.getRoot();
         this.parent = parent;
         this.children = children;
+    }
+
+    @Override
+    public int compareTo(State theOtherState) {
+        return theOtherState.getFinalDiscountedReward() > this.getFinalDiscountedReward() ? 1 : -1;
     }
 
     public int getDepth() {
@@ -78,5 +84,13 @@ public class State {
 
     public void addChildren(List<State> stateList) {
         this.children.addAll(stateList);
+    }
+
+    public double getFinalDiscountedReward() {
+        return finalDiscountedReward;
+    }
+
+    public void setFinalDiscountedReward(double finalDiscountedReward) {
+        this.finalDiscountedReward = finalDiscountedReward;
     }
 }

@@ -28,7 +28,9 @@ public class DiscountedRewardStrategy implements RewardMeasureStrategy {
             transferSuccessProbability = calculateTransferSuccessProbability(currentState, slaveCountry);
         }
 
-        return masterCountryDiscountedReward * transferSuccessProbability;
+        double finalDiscountedReward = masterCountryDiscountedReward * transferSuccessProbability;
+        currentState.setFinalDiscountedReward(finalDiscountedReward);
+        return finalDiscountedReward;
     }
 
     // Trade origin country possibility of accepting the trade

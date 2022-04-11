@@ -22,8 +22,8 @@ public class CountryFactory {
                     if (resource.getType() != ResourceType.BASIC) {
                         resourceMap.put(resource, 0);
                     } else {
-                        // random the resource from 30 to 80
-                        resourceMap.put(resource, (int) (Math.random() * 50) + 30);
+                        // random the resource from 10 to 30
+                        resourceMap.put(resource, (int) (Math.random() * 20) + 10);
                     }
                 });
 
