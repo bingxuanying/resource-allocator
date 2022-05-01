@@ -41,6 +41,15 @@ public class State implements Comparable<State> {
         this.children = children;
     }
 
+    public int printHistorySteps() {
+        if (parent == null) {
+            return 0;
+        }
+        int step = this.parent.printHistorySteps() + 1;
+        System.out.println("[Step #" + step + "] " + this.operation.toString());
+        return step;
+    }
+
     @Override
     public int compareTo(State theOtherState) {
         return theOtherState.getFinalDiscountedReward() > this.getFinalDiscountedReward() ? 1 : -1;

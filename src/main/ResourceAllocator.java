@@ -1,33 +1,35 @@
 package main;
 
 import main.generator.PruningStrategy;
-import main.internal.*;
+import main.internal.Country;
+import main.internal.CountryFactory;
+import main.internal.State;
+import main.internal.StateFactory;
 import main.internal.contant.Constant;
 import main.score.DiscountedRewardStrategy;
 import main.search.MasterCountrySearch;
 import main.search.ScheduleSearchContext;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class ResourceAllocator {
     public static void main(String[] args) {
-        System.out.println("Hello world");
         CountryFactory countryFactory = new CountryFactory();
         StateFactory stateFactory = new StateFactory();
 
         String masterCountryName = "self";
-        double gama = 0.5;
         List<String> countryNameList = new ArrayList<>() {{
             add(masterCountryName);
-            add("us");
+            add("U.S");
         }};
 
         List<Country> countryList = countryNameList
                 .stream()
-                .map(countryName -> countryFactory.create(countryName))
+                .map(countryFactory::create)
                 .collect(Collectors.toList());
 
         State rootState = stateFactory.createRootState(countryList);
@@ -35,35 +37,22 @@ public class ResourceAllocator {
         ScheduleSearchContext scheduleSearchContext = new ScheduleSearchContext(
                 new MasterCountrySearch(
                         new PruningStrategy(),
-                        new DiscountedRewardStrategy(gama),
+                        new DiscountedRewardStrategy(),
                         Constant.DEFAULT_RESOURCE_LIST,
                         Constant.MANUFACTURING_INPUT_MANUAL,
                         Constant.MANUFACTURING_OUTPUT_MANUAL
                 )
         );
 
-        State finalStep = null;
+        Instant start = Instant.now();
         try {
-            finalStep = scheduleSearchContext.executeStrategy(rootState, 3, masterCountryName);
+            State finalState = scheduleSearchContext.executeStrategy(rootState, 5, masterCountryName);
+            finalState.printHistorySteps();
         } catch (Exception exception) {
             System.out.println(exception);
         }
-
-        Stack<String> stepQueue = new Stack<>();
-
-        State currentStep = finalStep;
-        State parentStep = currentStep.getParent();
-        while (parentStep != null) {
-            Operation operation = currentStep.getOperation();
-            String stepDescription = operation.toString();
-            stepQueue.push(stepDescription);
-            currentStep = parentStep;
-            parentStep = currentStep.getParent();
-        }
-
-        while (!stepQueue.isEmpty()) {
-            String stepDescription = stepQueue.pop();
-            System.out.println(stepDescription);
-        }
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        System.out.println("Time takes: " + timeElapsed);
     }
 }

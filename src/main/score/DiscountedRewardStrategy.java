@@ -10,11 +10,7 @@ import java.util.Map;
 
 public class DiscountedRewardStrategy implements RewardMeasureStrategy {
 
-    private final double gamma;
-
-    public DiscountedRewardStrategy(double gamma) {
-        this.gamma = gamma;
-    }
+    private final double GAMA = 0.5;
 
     @Override
     public double measure(State currentState) {
@@ -53,7 +49,7 @@ public class DiscountedRewardStrategy implements RewardMeasureStrategy {
 
     // Current state quality minus initial state quality
     private double calculateDiscountedReward(State currentState, double undiscountedReward) {
-        return undiscountedReward * Math.pow(gamma, currentState.getDepth());
+        return undiscountedReward * Math.pow(GAMA, currentState.getDepth());
     }
 
     // Current state quality minus initial state quality

@@ -20,7 +20,7 @@ public class SuccessorsGeneratorContext {
             Map<Resource, Map<Resource, Integer>> manufacturingInputManual,
             Map<Resource, Map<Resource, Integer>> manufacturingOutputManual
     ) throws Exception {
-        return this.strategy.generate(
+        return this.strategy.execute(
                 targetCountryName,
                 currentState,
                 resourceList,

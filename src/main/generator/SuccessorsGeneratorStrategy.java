@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface SuccessorsGeneratorStrategy {
-    List<State> generate(
+    List<State> execute(
             String targetCountryName,
             State currentState,
             List<Resource> resourceList,

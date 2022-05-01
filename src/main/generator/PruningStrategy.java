@@ -18,7 +18,7 @@ public class PruningStrategy implements SuccessorsGeneratorStrategy {
     private final Trade trade = new Trade();
 
     @Override
-    public List<State> generate(
+    public List<State> execute(
             String targetCountryName,
             State currentState,
             List<Resource> resourceList,
@@ -52,7 +52,7 @@ public class PruningStrategy implements SuccessorsGeneratorStrategy {
         // Loop through all possible countries
         currentCountryStates
                 .entrySet()
-                .stream()
+                .parallelStream()
                 .forEach(countryStateEntry -> {
 
                     // Skip trade with itself
@@ -64,7 +64,6 @@ public class PruningStrategy implements SuccessorsGeneratorStrategy {
                     originCountry
                             .getResourceMap()
                             .entrySet()
-                            .stream()
                             .forEach(resourceEntry -> {
                                 Resource resource = resourceEntry.getKey();
                                 int maxAmount = resourceEntry.getValue();
@@ -138,7 +137,7 @@ public class PruningStrategy implements SuccessorsGeneratorStrategy {
 
         resourceList
                 // Stream
-                .stream()
+                .parallelStream()
                 // Go through each creatable resource
                 .forEach(targetResource -> {
                     // Return if the resource is not creatable

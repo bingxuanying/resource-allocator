@@ -44,7 +44,7 @@ public class MasterCountrySearch implements ScheduleSearchStrategy {
 
         while (!frontier.isEmpty()) {
             State state = frontier.poll();
-            if (maxDepth < state.getDepth()) {
+            if (maxDepth <= state.getDepth()) {
                 solutions.add(state);
             } else {
                 List<State> successors = successorsGeneratorContext.executeStrategy(
