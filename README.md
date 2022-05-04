@@ -2,7 +2,9 @@
 The project is to build a multi-method AI that plans and models trading and development (e.g., farming, manufacturing) decisions for respective virtual countries, each country with virtual resources and incentives for cooperating and competing with other countries.
 
 Video Presentation Link: 
+
 Part #1: https://www.youtube.com/watch?v=9tGiTsGhwNM
+
 Part #2: https://www.youtube.com/watch?v=sqftaNw209s
 
 ## Code Design
